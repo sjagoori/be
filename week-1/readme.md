@@ -161,6 +161,8 @@ With all that in place, you should be able to display the query by entering /exp
 
 1. How does the `app instance` work? What makes it possible you can do things like `app.get` or `app.listen`?
 
+The app instance in Express is a middleware. A request is made, the server receives it by listening to the port defined in `app.listen(PORT)` and the middleware process starts. For example, if you're expecting to receive `GET requests` then `app.get()` would be appropriate, if its a `post` then `app.post()` would fit. These methods allow the usage of `req` and `res`, allowing the server to process the data from the request to be processed before it can be returned with a response.
+
 2. What are the `req` and `res` parameters?
 
 The `req` parameter is short for request, it can be used to access the information in a request. For example, it would allow the backend to process parameters that are passed in the url as `req.param.parameter` for `/:parameter` or queries as `req,query.que` for `?que=Hello`.
