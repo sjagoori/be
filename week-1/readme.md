@@ -52,7 +52,7 @@ The require is a preinstalled node module that is globally available. The module
 Really anything you would normally use a longer command for; you can start, test and build your project.
 
 ---
-### 🤖Serve
+### 🍽Serve
 >In this assignment you’ll build a static file server with a little help from Express.
 
 #### 🛠The DIY way 
@@ -78,6 +78,8 @@ Url {
 In this return we can see the url deconstructed and that `pathname`, `path` and `href` hold the value entered after /. You can use this value in an if/switch statement to serve static files. We use the `fs` module to point to and serve these files. Mind you that the header's `content-type` changes to `text/html` as it's a html file and that it's status code to 404 if it's a 404.
 
 ```js
+./index.js
+
 const url = require('url');
 var fs = require('fs');
 const homepage = fs.readFileSync('public/index.html');
@@ -107,5 +109,64 @@ const server = http.createServer((req, res) => {
 ```
 
 #### ✨Express
-[TODO]
+Routing with Express is vastly different than the DIY method described above. Express has a structured approach to handling routes.
 
+Compared to the DIY, Express uses 2 additional folders: routes and views. In the routes folder we create a router module that handles and processes the routing. For example:
+
+```js
+./routes/indexRouter.js
+
+const express = require('express');
+const router = express.Router();
+
+router.get('/', (req, res) =>{
+  const query = req.query.query
+  res.render('indexView', {query: query});
+});
+
+module.exports = router;
+```
+In this router, we use the `express router` to process the GET request on /. Using the `req` we get to use it's `.query` method that we can use. In the `res.render()` are the view name (without file extension) and data (as object) passed. In this example, we used an `EJS file` for templating.
+
+```js
+./views/indexView.ejs
+
+<%= query %>
+```
+
+With the router in place we can use the view to display the data object we constructed previously.
+
+Now, in your index.js (or whatever is named in your package.json) we can start putting everything together. 
+
+```js
+./index.js
+
+const port = 3001;
+const express = require('express');
+const app = express();
+const indexRouter = require('./routes/indexRouter');
+
+app.set('view engine', 'ejs');
+app.use('/express', indexRouter);
+
+app.listen(port);
+```
+In our index.js we, again, declare our express variables and this time around also declare the router. 
+
+We have to set a `view engine` which is an `EJS` in our case but it can be html if you're not templating. Once that's set we're using `app.use()` to bind anything `/express` to the `indexRouter`. The `indexRouter` handles the url and its paramaters or queries from there.
+
+With all that in place, you should be able to display the query by entering /express?query=queryString
+
+## 👨🏻‍🎓Ask yourself upon completion (AYUC)
+
+1. How does the `app instance` work? What makes it possible you can do things like `app.get` or `app.listen`?
+
+2. What are the `req` and `res` parameters?
+
+The `req` parameter is short for request, it can be used to access the information in a request. For example, it would allow the backend to process parameters that are passed in the url as `req.param.parameter` for `/:parameter` or queries as `req,query.que` for `?que=Hello`.
+
+The `res` parameter is short for the response, it can be used to respond for example after a request is processed. The request parameter can send status codes, headers, files and more.
+
+3. The confusing part is that your laptop is both the client and the server. It's a local development environment.
+
+That is true, though, the Node server is running on your machine and your browser is the client. Devices on your local network can, if your router allows it, access your Node project hosted on your laptop by entering {laptops.ip}:{port} in their browser.
