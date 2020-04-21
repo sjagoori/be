@@ -4,8 +4,8 @@ In this week’s assignment, we’re experimenting with Node, NPM, and Express.
 ## 💡TIL’s 
 >Today(or this week) I Learned
 
-*   [🤖NPM](#🤖NPM)
-*   [✨Express](#✨Express)
+*   [🤖NPM](#NPM)
+*   [✨Express](#Express)
 
 ### 🤖NPM 
 >NPM is a package manager for the JavaScript programming language. It is the default package manager for the JavaScript runtime environment Node.js. It consists of a command line client, also called npm, and an online database of public and paid-for private packages, called the npm registry. [Wikipedia](https://en.wikipedia.org/wiki/Npm_(software))
@@ -165,7 +165,7 @@ The app instance in Express is a middleware. A request is made, the server recei
 
 2. What are the `req` and `res` parameters?
 
-The `req` parameter is short for request, it can be used to access the information in a request. For example, it would allow the backend to process parameters that are passed in the url as `req.param.parameter` for `/:parameter` or queries as `req,query.que` for `?que=Hello`.
+The `req` parameter is short for request, it can be used to access the information in a request. For example, it would allow the backend to process parameters that are passed in the url as `req.param.parameter` for `/:parameter` or queries as `req.query.que` for `?que=Hello`.
 
 The `res` parameter is short for the response, it can be used to respond for example after a request is processed. The request parameter can send status codes, headers, files and more.
 
