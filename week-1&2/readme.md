@@ -1,6 +1,5 @@
 # 📝 Week 1 & 2
 In this week’s assignment, we’re experimenting with Node, NPM, and Express.
-Code over at https://github.com/sjagoori/be/tree/develop/week-1
 
 ## 💡TIL’s 
 >Today(or this week) I Learned
