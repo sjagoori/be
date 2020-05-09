@@ -1,5 +1,6 @@
-# 📝 Week 1
+# 📝 Week 1 & 2
 In this week’s assignment, we’re experimenting with Node, NPM, and Express.
+Code over at https://github.com/sjagoori/be/tree/develop/week-1
 
 ## 💡TIL’s 
 >Today(or this week) I Learned
@@ -8,7 +9,7 @@ In this week’s assignment, we’re experimenting with Node, NPM, and Express.
 *   [✨Express](#Express)
 
 ### 🤖NPM 
->NPM is a package manager for the JavaScript programming language. It is the default package manager for the JavaScript runtime environment Node.js. It consists of a command line client, also called npm, and an online database of public and paid-for private packages, called the npm registry. [Wikipedia](https://en.wikipedia.org/wiki/Npm_(software))
+>NPM is a package manager for the JavaScript programming language. It is the default package manager for the JavaScript runtime environment Node.js. It consists of a command-line client, also called npm, and an online database of public and paid-for private packages called the npm registry. [Wikipedia](https://en.wikipedia.org/wiki/Npm_(software))
 
 #### ✏️Using NPM 
 
@@ -37,7 +38,7 @@ The require is a preinstalled node module that is globally available. The module
 
 2. What's the difference between `dependencies` and `devDependencies`?
 
-`devDependencies` are packages that are **only** used during development. ESlint for example is used during developement but is not needed in your build.\
+`devDependencies` are packages that are **only** used during development. ESlint, for example, is used during development but is not needed in your build.\
 
 `dependencies` are the essential packages used in your project.
 
@@ -49,16 +50,16 @@ The require is a preinstalled node module that is globally available. The module
 
 4. What tasks can you run with `npm run scripts`?
 
-Really anything you would normally use a longer command for; you can start, test and build your project.
+Really anything you would normally use a longer command for; you can start, test, and build your project.
 
 ---
 ### 🍽Serve
 >In this assignment you’ll build a static file server with a little help from Express.
 
 #### 🛠The DIY way 
-The DIY aproach uses the `fs` and `url` modules.
+The DIY approach uses the `fs` and `url` modules.
 
-The url module reads the entered url and returns a json to the server, for example:
+The URL module reads the entered URL and returns a JSON to the server, for example:
 ```json
 Url {
   protocol: null,
@@ -75,7 +76,7 @@ Url {
   href: '/about'
 }
 ```
-In this return we can see the url deconstructed and that `pathname`, `path` and `href` hold the value entered after /. You can use this value in an if/switch statement to serve static files. We use the `fs` module to point to and serve these files. Mind you that the header's `content-type` changes to `text/html` as it's a html file and that it's status code to 404 if it's a 404.
+In this return we can see the URL deconstructed and that `pathname`, `path` and `href` hold the value entered after /. You can use this value in an if/switch statement to serve static files. We use the `fs` module to point to and serve these files. Mind you that the header's `content-type` changes to `text/html` as it's a HTML file and that it's status code to 404 if it's a 404.
 
 ```js
 ./index.js
@@ -134,7 +135,7 @@ In this router, we use the `express router` to process the GET request on /. Usi
 <%= query %>
 ```
 
-With the router in place we can use the view to display the data object we constructed previously.
+With the router in place, we can use the view to display the data object we constructed previously.
 
 Now, in your index.js (or whatever is named in your package.json) we can start putting everything together. 
 
@@ -153,7 +154,7 @@ app.listen(port);
 ```
 In our index.js we, again, declare our express variables and this time around also declare the router. 
 
-We have to set a `view engine` which is an `EJS` in our case but it can be html if you're not templating. Once that's set we're using `app.use()` to bind anything `/express` to the `indexRouter`. The `indexRouter` handles the url and its paramaters or queries from there.
+We have to set a `view engine` which is an `EJS` in our case but it can be HTML if you're not templating. Once that's set we're using `app.use()` to bind anything `/express` to the `indexRouter`. The `indexRouter` handles the URL and its parameters or queries from there.
 
 With all that in place, you should be able to display the query by entering /express?query=queryString
 
@@ -165,10 +166,16 @@ The app instance in Express is a middleware. A request is made, the server recei
 
 2. What are the `req` and `res` parameters?
 
-The `req` parameter is short for request, it can be used to access the information in a request. For example, it would allow the backend to process parameters that are passed in the url as `req.param.parameter` for `/:parameter` or queries as `req.query.que` for `?que=Hello`.
+The `req` parameter is short for request, it can be used to access the information in a request. For example, it would allow the backend to process parameters that are passed in the URL as `req.param.parameter` for `/:parameter` or queries as `req.query.que` for `?que=Hello`.
 
-The `res` parameter is short for the response, it can be used to respond for example after a request is processed. The request parameter can send status codes, headers, files and more.
+The `res` parameter is short for the response, it can be used to respond for example after a request is processed. The request parameter can send status codes, headers, files, and more.
 
 3. The confusing part is that your laptop is both the client and the server. It's a local development environment.
 
 That is true, though, the Node server is running on your machine and your browser is the client. Devices on your local network can, if your router allows it, access your Node project hosted on your laptop by entering {laptops.ip}:{port} in their browser.
+
+4. How does Express combine the data from the server with the templating?
+Express extracts the data from the middleware process and passes the data as object to the views as they are rendered.
+
+5. How do partials work? Can you set-up a folder structure for your component system?
+Partials are reusable components such as the nav or header/footer. One could make a separate components folder and include those components in each EJS like <% include ./component/header %>
