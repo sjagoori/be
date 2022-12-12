@@ -16,7 +16,7 @@
   "dependencies": {
     "camelcase": "^6.0.0",
     "ejs": "^3.0.2",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "fkill": "^7.0.0"
   }
 }
